@@ -1,0 +1,143 @@
+
+.services-main {
+  flex: 1;
+  padding: 40px;
+  background:#f8f9fc;
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap:30px;
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  color: #6b7280;
+  font-size: 18px;
+  max-width: 500px;
+}
+
+.add-service-btn {
+  background: #6c3cf0;
+  color: white;
+  border: none;
+  padding: 18px 30px;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space:nowrap;
+  min-width:120px;
+}
+
+.services-table {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #ececec;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 22px 24px;
+  text-align: left;
+  font-weight: 600;
+  color: #6b7280;
+  background: #fafafa;
+}
+
+td {
+  padding: 24px;
+  text-align: left;
+}
+
+tbody tr {
+  border-top: 1px solid #eee;
+}
+
+.service-cell {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 280px;
+}
+
+.service-cell img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+
+.status.active {
+  background: #e8f9ee;
+  color: #16a34a;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.actions {
+  white-space: nowrap;
+}
+
+.actions button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-top: 1px solid #eee;
+}
+
+.pagination {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.pagination .active {
+  background: #6c3cf0;
+  color: white;
+}
+
+.add-service-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #6c3cf0;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 600;
+}
