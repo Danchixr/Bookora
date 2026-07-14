@@ -18,7 +18,6 @@ export default async function EditServicePage({ params }) {
     .eq("id", id)
     .single();
 
-   console.log(service);
 
   return (
     <div className="dashboard-layout">

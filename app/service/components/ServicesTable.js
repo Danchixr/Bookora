@@ -1,10 +1,126 @@
 import Link from "next/link";
+import { Pencil, Trash2, Clock3, CircleCheck } from "lucide-react";
 import { deleteServiceAction } from "@/app/add-service/actions";
 
 export default function ServicesTable({ services }) {
   return (
 
     <section className="services-table">
+
+        {/* MOBILE VIEW */}
+      <div className="mobile-services-list">
+
+  {services.map((service) => (
+
+    <div
+      className="mobile-service-card"
+      key={service.id}
+    >
+
+      <div className="mobile-service-top">
+
+        <div className="mobile-service-image">
+
+          <img
+            src={
+              service.image_url ||
+              "https://via.placeholder.com/70"
+            }
+            alt={service.name}
+          />
+
+        </div>
+
+        <div>
+
+          <h3>{service.name}</h3>
+
+          <p>₦{service.price}</p>
+
+        </div>
+
+      </div>
+
+
+      <div className="mobile-service-info">
+
+        <div>
+
+          <span>Duration</span>
+
+          <strong>
+
+            <Clock3 size={15} />
+
+            {service.duration} mins
+
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>Status</span>
+
+          <strong className="mobile-active">
+
+            <CircleCheck size={15} />
+
+            Active
+
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div className="mobile-service-actions">
+
+        <Link
+          href={`/service/edit/${service.id}`}
+          className="mobile-action-btn edit-btn"
+        >
+
+          <Pencil size={17} />
+
+          Edit
+
+        </Link>
+
+
+        <form action={deleteServiceAction}>
+
+          <input
+            type="hidden"
+            name="service_id"
+            value={service.id}
+          />
+
+          <button
+            type="submit"
+            className="mobile-action-btn delete-btn"
+          >
+
+            <Trash2 size={17} />
+
+            Delete
+
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  ))}
+
+</div>
+
+  {/* DESKTOP VIEW */}
+      <div className="desktop-services-table">
 
       <table>
 
@@ -101,6 +217,8 @@ export default function ServicesTable({ services }) {
 </tbody>
 
       </table>
+
+      </div>
 
     </section>
 

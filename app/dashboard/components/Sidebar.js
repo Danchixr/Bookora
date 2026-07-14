@@ -1,4 +1,9 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 export default function Sidebar() {
+   const pathname = usePathname();
   return (
     <aside className="dashboard-sidebar">
 
@@ -26,17 +31,32 @@ export default function Sidebar() {
           Home
         </a>
 
-        <a href="#" className="nav-item active">
-          Dashboard
-        </a>
+        <Link
+  href="/dashboard"
+  className={`nav-item ${
+    pathname === "/dashboard" ? "active" : ""
+  }`}
+>
+  Dashboard
+</Link>
 
-        <a href="#" className="nav-item">
-          Bookings
-        </a>
+       <Link
+  href="/bookings"
+  className={`nav-item ${
+    pathname.startsWith("/bookings") ? "active" : ""
+  }`}
+>
+  Bookings
+</Link>
 
-        <a href="#" className="nav-item">
-          Services
-        </a>
+        <Link
+  href="/service"
+  className={`nav-item ${
+    pathname.startsWith("/service") ? "active" : ""
+  }`}
+>
+  Services
+</Link>
 
         <a href="#" className="nav-item">
           Withdraw

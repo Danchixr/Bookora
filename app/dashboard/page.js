@@ -1,3 +1,4 @@
+import { getDashboardData } from "../../lib/dashboard";
 import { supabase } from "@/lib/supabaseClient"
 import "./dashboard.css"
 import Sidebar from "./components/Sidebar"
@@ -7,39 +8,26 @@ import Test from "./components/RecentBookings"
 import RecentBookings from "./components/RecentBookings"
 import BusinessOverview from "./components/BusinessOverview"
 import UpcomingBookings from "./components/UpcomingBookings"
+import MobileDashboard from "./components/mobile/MobileDashboard";
 
 export default async function DashboardPage() {
 
-    const { data: business, error } = await supabase
-  .from("businesses")
-  .select("*")
-  .limit(1)
-  .single()
-
-  console.log(business) 
-
-  const { data: services } = await supabase
-  .from("services")
-  .select("*")
-  .eq("business_id", business.id)
-
- const { data: bookings } = await supabase
-  .from("bookings")
-  .select(`
-    *,
-    services(name)
-  `)
-  .eq("business_id", business.id)
-
-  console.log("Business ID:", business.id)
-console.log("Bookings:", bookings)
+  const {
+  business,
+  services,
+  bookings,
+} = await getDashboardData();
 
   return (
 
     <div className="dashboard-layout">
-      <Sidebar />
+      
+  <Sidebar />
+
 
       <main className="dashboard-main">
+
+    <div className="desktop-dashboard">
         <DashboardHeader />
 
         <StatsGrid
@@ -63,7 +51,17 @@ console.log("Bookings:", bookings)
 
   </div>
 
+  
+  {/* Existing dashboard */}
+  </div>
+
 </div>
+
+<MobileDashboard
+      business={business}
+      bookings={bookings}
+      services={services}
+    />
       </main>
     </div>
   )

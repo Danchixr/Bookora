@@ -116,6 +116,10 @@ transition:.3s;
 transform:translateY(-2px);
 }
 
+.mobile-page-header{
+    display:none;
+}
+
 @media(max-width:768px){
 
 .add-service-main{
@@ -132,6 +136,25 @@ grid-template-columns:1fr;
 
 .add-service-card{
 padding:24px;
+}
+
+.page-header{
+    display: flex;
+}
+
+.mobile-page-header{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:25px;
+}
+
+.mobile-page-header h2{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
 }
 
 }

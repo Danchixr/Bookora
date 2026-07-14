@@ -1,21 +1,37 @@
-export default function AddServiceHeader() {
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
+export default function AddServiceHeader({
+  title = "Add New Service",
+  subtitle = "Create and publish a new service",
+}) {
   return (
+    <>
+      {/* Mobile Header */}
+      <div className="mobile-page-header">
 
-    <div className="page-header">
+        <Link
+          href="/service"
+          className="back-btn"
+        >
+          <ArrowLeft size={24} strokeWidth={2.2} />
+        </Link>
 
-      <div>
+        <h2>{title}</h2>
 
-        <h1>
-          Add New Service
-        </h1>
-
-        <p>
-          Create and publish a new service
-        </p>
+        <div style={{ width: 42 }} />
 
       </div>
 
-    </div>
+      {/* Desktop Header */}
+      <div className="page-header">
 
+        <div>
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
+        </div>
+
+      </div>
+    </>
   );
 }
