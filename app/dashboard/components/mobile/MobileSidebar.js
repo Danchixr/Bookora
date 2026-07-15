@@ -135,8 +135,8 @@ export default function MobileSidebar({ onClose }) {
   
 
    <Link
-  href="/bookings"
-  className={pathname.startsWith("/bookings") ? "active" : ""}
+  href="/mybookings"
+  className={pathname.startsWith("/mybookings") ? "active" : ""}
   style={{
     textDecoration: "none",
     color: pathname.startsWith("/bookings")

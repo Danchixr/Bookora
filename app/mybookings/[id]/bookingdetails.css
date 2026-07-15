@@ -1,0 +1,163 @@
+.booking-details-page{
+    background:#f8f9fc;
+    min-height:100vh;
+    padding:20px;
+}
+
+.booking-details-header{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:28px;
+}
+
+.booking-details-header h2{
+    font-size:24px;
+    font-weight:700;
+    color:#111827;
+}
+
+.back-btn{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#fff;
+    border:1px solid #ececec;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111827;
+    text-decoration:none;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.booking-customer-card{
+    background:#fff;
+    border-radius:22px;
+    padding:22px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:22px;
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+}
+
+.booking-customer-card h3{
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.booking-customer-card p{
+    color:#6b7280;
+}
+
+.customer-avatar{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:#6c3cf0;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    font-weight:700;
+    flex-shrink:0;
+}
+
+.booking-info-card{
+    background:#fff;
+    border-radius:22px;
+    padding:8px 22px;
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+}
+
+.info-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:22px 0;
+    border-bottom:1px solid #f1f1f1;
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-row svg{
+    color:#6c3cf0;
+    flex-shrink:0;
+}
+
+.info-row small{
+    display:block;
+    color:#9ca3af;
+    margin-bottom:6px;
+    font-size:13px;
+}
+
+.info-row strong{
+    font-size:17px;
+    color:#111827;
+    text-transform:capitalize;
+}
+
+.status.pending{
+    color:#d97706;
+}
+
+.status.confirmed{
+    color:#16a34a;
+}
+
+.status.completed{
+    color:#2563eb;
+}
+
+.status.cancelled{
+    color:#dc2626;
+}
+
+.booking-actions{
+    margin-top:34px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.accept-btn,
+.decline-btn{
+    height:56px;
+    border:none;
+    border-radius:16px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.accept-btn{
+    background:#6c3cf0;
+    color:#fff;
+}
+
+.accept-btn:hover{
+    background:#5b2de0;
+}
+
+.decline-btn{
+    background:#fff;
+    color:#dc2626;
+    border:1px solid #f0d2d2;
+}
+
+.decline-btn:hover{
+    background:#fff5f5;
+}
+
+.booking-action-form{
+    width:100%;
+}
+
+.booking-action-form button{
+    width:100%;
+}

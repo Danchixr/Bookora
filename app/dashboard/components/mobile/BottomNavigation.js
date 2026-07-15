@@ -25,8 +25,8 @@ export default function BottomNavigation() {
 </Link>
 
      <Link
-  href="/bookings"
-  className={`bottom-item ${pathname.startsWith("/bookings") ? "active" : ""}`}
+  href="/mybookings"
+  className={`bottom-item ${pathname.startsWith("/mybookings") ? "active" : ""}`}
 >
   <CalendarDays size={22} />
   <small>Bookings</small>
