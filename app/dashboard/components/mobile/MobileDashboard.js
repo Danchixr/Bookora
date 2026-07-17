@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
 
+import {
+  getBookings,
+  getPendingBookingsCount,
+} from "@/lib/bookings";
+
 import MobileHeader from "./MobileHeader";
 import HeroCard from "./HeroCard";
 import OverviewCards from "./OverviewCards";
@@ -14,9 +19,11 @@ export default function MobileDashboard({
   business,
   bookings,
   services,
+  pendingBookings,
 }) {
 
  const [menuOpen, setMenuOpen] = useState(false);
+ 
   return (
     <div className="mobile-dashboard">
       
@@ -54,7 +61,9 @@ export default function MobileDashboard({
 <RecentBookingList
   bookings={bookings}
 />
-<BottomNavigation />
+<BottomNavigation
+  pendingBookings={pendingBookings}
+/>
 
     </div>
   );

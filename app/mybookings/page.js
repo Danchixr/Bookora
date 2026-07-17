@@ -1,4 +1,8 @@
-import { getBookings } from "@/lib/bookings";
+import {
+  getBookings,
+  getPendingBookingsCount,
+} from "@/lib/bookings";
+
 import "./mybookings.css";
 
 import MobileBookingsList from "./components/MobileBookingsList";
@@ -8,6 +12,7 @@ import MyBookingsHeader from "./components/MyBookingsHeader";
 export default async function MyBookingsPage() {
 
   const bookings = await getBookings();
+  const pendingBookings = await getPendingBookingsCount();
 
   return (
 
@@ -20,7 +25,7 @@ export default async function MyBookingsPage() {
 
       </main>
 
-      <BottomNavigation />
+      <BottomNavigation pendingBookings={pendingBookings} />
 
     </div>
 

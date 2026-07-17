@@ -366,3 +366,38 @@
     color:#6b7280;
     margin-top:4px;
 }
+
+.nav-icon{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.booking-count{
+  position:absolute;
+  top:-6px;
+  right:-10px;
+
+}
+
+.nav-icon{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.booking-count{
+    position:absolute;
+
+    top:-8px;
+    right:-10px;
+
+    font-size:2px;
+    font-weight:500;
+
+    color:#5B34F4;   /* same purple */
+
+    line-height:1;
+}

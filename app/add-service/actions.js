@@ -15,7 +15,10 @@ export async function createServiceAction(formData) {
   if (!business) {
     throw new Error("Business not found.");
   }
-
+console.log("IMAGE URL:", formData.get("image_url"));
+console.log({
+  image_url: formData.get("image_url"),
+});
   const service = {
     business_id: business.id,
     name: formData.get("name"),
@@ -24,7 +27,7 @@ export async function createServiceAction(formData) {
     duration: Number(formData.get("duration")),
     description: formData.get("description"),
     deposit_amount: Number(formData.get("deposit_amount")) || 0,
-    image_url: "",
+    image_url: formData.get("image_url"),
   };
 
   const { error } = await supabase

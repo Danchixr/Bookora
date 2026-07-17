@@ -169,7 +169,7 @@ export default function MobileSidebar({ onClose }) {
     Services
   </Link>
 
- <Link href="#"
+ <Link href="/withdraw"
  
  style={{
   textDecoration: "none",
@@ -180,7 +180,7 @@ export default function MobileSidebar({ onClose }) {
 }}
  >Withdraw</Link>
 
-  <Link href="#"
+  <Link href="/settings"
   
   style={{
   textDecoration: "none",

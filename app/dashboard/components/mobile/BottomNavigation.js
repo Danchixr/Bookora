@@ -11,7 +11,10 @@ import {
   Settings,
 } from "lucide-react";
 
-export default function BottomNavigation() {
+export default function BottomNavigation({
+  pendingBookings,
+}) {
+  console.log(pendingBookings);
   const pathname = usePathname();
   return (
     <nav className="bottom-nav">
@@ -28,7 +31,17 @@ export default function BottomNavigation() {
   href="/mybookings"
   className={`bottom-item ${pathname.startsWith("/mybookings") ? "active" : ""}`}
 >
+  <div className="nav-icon">
+
   <CalendarDays size={22} />
+
+  {pendingBookings > 0 && (
+    <span className="booking-count">
+      {pendingBookings > 99 ? "99+" : pendingBookings}
+    </span>
+  )}
+
+</div>
   <small>Bookings</small>
 </Link>
 

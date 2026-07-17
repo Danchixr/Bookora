@@ -1,0 +1,398 @@
+.withdraw-page{
+    padding:20px;
+    padding-bottom:90px;
+    background:#f8f9fc;
+    min-height:100vh;
+}
+
+.withdraw-header{
+    margin-bottom:24px;
+}
+
+.withdraw-header h1{
+    font-size:28px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:6px;
+}
+
+.withdraw-header p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.withdraw-header{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:16px;
+
+    margin-bottom:24px;
+
+}
+
+.back-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:12px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#111827;
+
+    text-decoration:none;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+    border:1px solid #ececec;
+
+}
+
+.balance-card{
+
+    background:linear-gradient(135deg,#6c3cf0,#7c4dff);
+
+    color:white;
+
+    border-radius:22px;
+
+    padding:24px;
+
+    margin-bottom:24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.balance-label{
+
+    font-size:14px;
+
+    opacity:.8;
+
+}
+
+.balance-card h2{
+
+    font-size:34px;
+
+    margin:8px 0;
+
+    font-weight:700;
+
+}
+
+.balance-card p{
+
+    opacity:.8;
+
+    font-size:14px;
+
+}
+
+.balance-status{
+
+    align-self:flex-start;
+
+    background:#16a34a;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.withdraw-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    border:1px solid #ececec;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    margin-bottom:24px;
+
+}
+
+.withdraw-card h3{
+
+    font-size:20px;
+
+    margin-bottom:22px;
+
+    color:#111827;
+
+}
+
+.withdraw-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+.form-group input,
+.form-group select{
+
+    height:54px;
+
+    border:1px solid #dcdcdc;
+
+    border-radius:14px;
+
+    padding:0 16px;
+
+    font-size:15px;
+
+    background:white;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    outline:none;
+
+    border-color:#6c3cf0;
+
+}
+
+.withdraw-btn{
+
+    height:56px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#6c3cf0,#7c4dff);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    margin-top:8px;
+
+}
+
+.withdraw-filters{
+
+    display:flex;
+
+    gap:12px;
+
+    overflow-x:auto;
+
+    margin-bottom:22px;
+
+    scrollbar-width:none;
+
+}
+
+.withdraw-filters::-webkit-scrollbar{
+    display:none;
+}
+
+.filter-chip{
+
+    border:none;
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:999px;
+
+    padding:12px 18px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#6b7280;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:.25s;
+
+}
+
+.filter-chip.active{
+
+    background:#6c3cf0;
+
+    color:white;
+
+    border-color:#6c3cf0;
+
+}
+
+.withdraw-history{
+
+    margin-bottom:30px;
+
+}
+
+.withdraw-history h3{
+
+    font-size:20px;
+
+    margin-bottom:18px;
+
+    color:#111827;
+
+}
+
+.withdraw-history-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.withdraw-history-card{
+
+    background:white;
+
+    border:1px solid #ececec;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.04);
+
+}
+
+.history-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:14px;
+
+}
+
+.history-top h4{
+
+    font-size:18px;
+
+    margin-bottom:4px;
+
+    color:#111827;
+
+}
+
+.history-top p{
+
+    font-size:14px;
+
+    color:#6b7280;
+
+}
+
+.history-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:13px;
+
+    color:#9ca3af;
+
+}
+
+.history-status{
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.history-status.completed{
+
+    background:#e8f9ee;
+
+    color:#16a34a;
+
+}
+
+.history-status.pending{
+
+    background:#fff7e6;
+
+    color:#f59e0b;
+
+}
+
+.history-status.failed{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}

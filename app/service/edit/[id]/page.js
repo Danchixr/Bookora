@@ -31,8 +31,6 @@ export default async function EditServicePage({ params }) {
   subtitle="Update your service information"
 />
 
-        <ImageUpload />
-
         <ServiceForm service={service}>
 
           <SaveButton text="Save Changes" />

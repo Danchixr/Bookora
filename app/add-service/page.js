@@ -17,7 +17,6 @@ export default function AddServicePage() {
       <main className="add-service-main">
 
         <AddServiceHeader />
-        <ImageUpload />
         <ServiceForm>
            <SaveButton />
         </ServiceForm>   

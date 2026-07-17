@@ -1,3 +1,8 @@
+import {
+  getBookings,
+  getPendingBookingsCount,
+} from "@/lib/bookings";
+
 import { getServices } from "@/lib/services";
 import "../dashboard/dashboard.css";
 import "./services.css";
@@ -10,7 +15,7 @@ import BottomNavigation from "../dashboard/components/mobile/BottomNavigation";
 
 
 export default async function ServicePage(){
-
+const pendingBookings = await getPendingBookingsCount();
  const services = await getServices();
 
  return (
@@ -34,7 +39,7 @@ export default async function ServicePage(){
 
 
    <div className="bottom-navigation">
-      <BottomNavigation />
+      <BottomNavigation pendingBookings={pendingBookings} />
    </div>
 
 

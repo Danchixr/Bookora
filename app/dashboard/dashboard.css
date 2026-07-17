@@ -602,10 +602,13 @@ overflow:hidden;
 
 .overview-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr, 1fr !important;
   gap:16px;
 }
 
+.overview-card.orange {
+  grid-column: 1 / -1 ;
+}
 .overview-card{
   background:white;
   border-radius:22px;
@@ -614,7 +617,7 @@ overflow:hidden;
 }
 
 .overview-card.green{
-  grid-column:1;
+  grid-column:2;
 }
 
 .card-icon{

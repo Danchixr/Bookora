@@ -9,6 +9,9 @@ import RecentBookings from "./components/RecentBookings"
 import BusinessOverview from "./components/BusinessOverview"
 import UpcomingBookings from "./components/UpcomingBookings"
 import MobileDashboard from "./components/mobile/MobileDashboard";
+import {
+  getPendingBookingsCount,
+} from "@/lib/bookings";
 
 export default async function DashboardPage() {
 
@@ -18,11 +21,15 @@ export default async function DashboardPage() {
   bookings,
 } = await getDashboardData();
 
+const pendingBookings =
+  await getPendingBookingsCount();
   return (
 
     <div className="dashboard-layout">
       
+ <div className="desktop-sidebar">
   <Sidebar />
+</div>
 
 
       <main className="dashboard-main">
@@ -61,6 +68,7 @@ export default async function DashboardPage() {
       business={business}
       bookings={bookings}
       services={services}
+      pendingBookings={pendingBookings}
     />
       </main>
     </div>

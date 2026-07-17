@@ -3,6 +3,8 @@ import {
   updateServiceAction,
 } from "../actions";
 
+import ImageUpload from "./ImageUpload";
+
 export default function ServiceForm({ children, service }) {
 
   const formAction = service
@@ -17,13 +19,12 @@ export default function ServiceForm({ children, service }) {
   className="service-form"
 >
 
-        {service && (
-  <input
-    type="hidden"
-    name="service_id"
-    value={service.id}
-  />
-)}
+    
+
+  <ImageUpload
+    name="image_url"
+    label="Service Image"
+/>
 
         <div className="form-group">
 
