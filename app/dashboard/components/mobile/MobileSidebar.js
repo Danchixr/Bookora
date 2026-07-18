@@ -86,7 +86,13 @@ export default function MobileSidebar({ onClose }) {
       borderRadius: "50%",
     }}
   />
-
+<Link
+  href="/public-business-page"
+  style={{
+    textDecoration: "none",
+    color: "inherit",
+  }}
+  >
   <div>
     <h3
       style={{
@@ -106,7 +112,18 @@ export default function MobileSidebar({ onClose }) {
     >
       Spa & Wellness
     </p>
+
+     <span
+        style={{
+          color: "#6C4CF1",
+          fontSize: "13px",
+          fontWeight: "600",
+        }}
+      >
+        👁 View Live Page
+      </span>
   </div>
+</Link> 
 </div>
 
 <nav
@@ -237,4 +254,5 @@ export default function MobileSidebar({ onClose }) {
 </button>
     </div>
   );
+  
 }

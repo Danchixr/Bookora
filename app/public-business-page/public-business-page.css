@@ -1,0 +1,484 @@
+
+.business-header{
+    position:relative;
+    width:100%;
+}
+
+.business-banner{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+}
+
+.header-overlay{
+    position:absolute;
+    top:20px;
+    left:20px;
+    right:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header-actions{
+    display:flex;
+    gap:12px;
+}
+
+.header-btn{
+    width:30px;
+    height:30px;
+
+    padding: 4px;
+
+    border:none;
+    border-radius:50%;
+
+    background:white;
+    cursor:pointer;
+
+    font-size:18px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.12);
+}
+
+.whatsapp-btn{
+
+    position:absolute;
+
+    right:20px;
+    bottom:-22px;
+
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#25D366;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+
+
+/* BUSINESS INFO*/
+
+.business-meta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.meta-item{
+    display:flex;
+    align-items:center;
+    gap:4px;
+}
+
+.meta-item svg{
+    flex-shrink:0;
+}
+
+.business-info{
+
+    display:flex;
+
+    gap:18px;
+
+    padding:30px 20px 10px;
+
+    align-items:center;
+
+}
+
+.business-logo{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:20px;
+
+    object-fit:cover;
+
+    border:4px solid white;
+
+    margin-top:-200px;
+    margin-bottom: -35px;
+
+    background:white;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    position: absolute;
+
+}
+
+.business-text{
+
+    flex:1;
+
+}
+
+.business-text h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap: 10px;
+    font-weight:600 ;
+    margin-bottom:5px;
+    margin-top: -10px;
+    font-size: 18px;
+
+}
+
+.rating{
+
+    color:#F5A623;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.rating{
+    display:flex;
+    align-items:center;
+    gap:4px;
+}
+
+.category{
+
+    color:#666;
+    font-size: 13px;
+    margin-bottom:8px;
+
+}
+
+.location,
+.hours{
+
+    color:#444;
+
+    font-size:14px;
+
+    margin-bottom:4px;
+
+}
+
+
+.business-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap:wrap ; /* wraps on very small screens */
+  color: #555;
+  font-size: 13px;
+}
+
+.dot {
+  color: #999;
+}
+
+
+
+
+/* FEATURES HIGHLIGHTS SECTION */
+
+
+.feature-highlights{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:12px;
+
+    padding:15px 20px;
+
+    border-top:1px solid #eee;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.feature-card{
+
+    text-align:center;
+
+}
+
+.feature-icon{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:16px;
+
+    background:#F7F7F7;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0 auto 10px;
+
+    font-size:22px;
+
+}
+
+.feature-card p{
+
+    margin:0;
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+.feature-card span{
+
+    font-size:12px;
+
+    color:#666;
+
+}
+
+.feature-icon svg{
+    color:#4B5563;
+}
+
+
+/* ABOUT SECTION */
+
+.about-section{
+
+    padding:12px 20px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:14px;
+
+}
+
+.section-header h2{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+.section-link{
+
+    background:none;
+
+    border:none;
+
+    color:#B23563;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+.about-text{
+
+    color:#666;
+
+    font-size:13.5px;
+
+    line-height:1.7;
+
+    margin:0;
+
+}
+
+
+
+
+/* SERVICES SECTION */
+
+
+.services-section{
+
+    padding:20px 15px;
+    padding-bottom: 150px;
+
+}
+
+
+.service-card{
+    display:flex;
+    gap:16px;
+
+    padding:10px;
+
+    border-radius:18px;
+
+    background:#fff;
+    margin-bottom: 15px;
+
+    box-shadow:0 6px 16px rgba(0,0,0,.05);
+}
+
+.service-image{
+    width:90px;
+    height:70px;
+    border-radius:16px;
+    object-fit:cover;
+    flex-shrink:0;
+    margin-top:8px;
+}
+
+.service-info{
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.service-info h3{
+    margin:0;
+    font-size:17px;
+}
+
+.service-info p{
+    margin-top:6px;
+    color:#666;
+    font-size:14px;
+}
+
+.service-footer{
+    margin-top:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.service-footer span{
+    font-size:18px;
+    font-weight:700;
+    color:#6C4CF1;
+}
+
+.service-footer button{
+    border:none;
+    background:#6C4CF1;
+    color:white;
+    padding:8px 16px;
+    border-radius:12px;
+    margin-top: -10px;
+    cursor:pointer;
+}
+
+
+
+/* MANAGE BUSINESS */
+
+
+.booking-bar{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#fff;
+    padding:16px 20px;
+    box-shadow:0 -6px 18px rgba(0,0,0,.08);
+    z-index:100;
+}
+
+.manage-btn{
+    width:100%;
+    border:none;
+    border-radius:16px;
+    padding:16px;
+    background:#6C4CF1;
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    margin-bottom: 55px;
+}
+
+
+
+
+.manage-btn{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-decoration:none;
+    gap: 10px;
+    border-radius:16px;
+    padding:16px;
+
+    background:#6C4CF1;
+    color:#fff;
+
+    font-size:16px;
+    font-weight:700;
+}
+
+
+.booking-bar{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.map-btn{
+    width:54px;
+    height:54px;
+    margin-bottom: 55px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#F5F2FF;
+
+    color:#6C4CF1;
+
+    flex-shrink:0;
+}
+
+.manage-btn{
+    flex:1;
+}
