@@ -117,13 +117,13 @@
 
 
 .submit-wrapper{
-    margin-top:36px;
+    margin-top:30px;
 }
 
 .create-business-btn{
 
-    width:100%;
-       
+    width:60%;
+       margin-left: 60px;
     padding:17px;
 
     border:none;
@@ -153,10 +153,15 @@
 
 .create-business-page .working-days-field{
     margin-top: 8px;
+    margin-bottom: 5px;
 }
 
 .create-business-page .days-grid{
-    margin-top: 16px;
+    margin-top: 18px;
+     display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    
 }
 
 .create-business-page .day-btn{
@@ -168,17 +173,45 @@
     color:#fff;
     border-color:#6C4CF1;
     border-radius: 25px;
+    
 }
 
 .working-days-field{
-    min-height:52px;
     display:flex;
-    align-items:center;
     flex-wrap:wrap;
     gap:8px;
 
-    border:1px solid #E5E5E5;
-    border-radius:14px;
+    min-height:60px;
 
-    padding:10px 14px;
+    padding:16px;
+
+    border:1px solid #E5E5E5;
+    border-radius:18px;
+}
+
+.day-chip{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    height:39px;
+
+    padding:0 18px;
+
+    border-radius:999px;
+
+    background:#6C4CF1;
+    color:#fff;
+
+    font-size:16px;
+}
+
+.day-btn{
+    min-width:15px; /* adjust to match Settings */
+    height:56px;
+
+    border:1px solid #E5E5E5;
+    border-radius:18px;
+
+    background:#fff;
 }
