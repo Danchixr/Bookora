@@ -23,7 +23,9 @@ export default function FeaturedBusinesses({ businesses }) {
         {businesses.map((business) => (
 
           <Link
-            href={`/business/${business.id}`}
+            href={ business.id === 1
+        ? "/business-page"
+        : `/business/${business.id}`}
             className="business-card"
             key={business.id}
           >

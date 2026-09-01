@@ -272,7 +272,7 @@
     font-size:14px;
 }
 
-.booking-btn{
+.view-booking-btn{
     display:inline-flex;
 
     background:#6C4CF1;
@@ -528,6 +528,8 @@
   height: 100vh;
   background: white;
   z-index: 1001;
+  padding: 15px 24px 100px;
+  
 }
 
 .sidebar-overlay {
@@ -664,6 +666,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 150px;
 
   width: 100%;
   padding: 14px 16px;
@@ -741,3 +744,33 @@
 }
 
 
+
+
+
+
+
+.sidebar-bottom {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+}
+
+.visit-dashboard-btn {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 15px 16px;
+  border-radius: 15px;
+
+  background: #6c4cf1;
+  color: #fff;
+
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

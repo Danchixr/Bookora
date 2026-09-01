@@ -49,11 +49,11 @@ export default function UpcomingBookings({ bookings }) {
           </div>
 
           <Link
-            href="/bookings"
-            className="booking-btn"
-          >
-            View Booking
-          </Link>
+  href="/booking-details"
+  className="view-booking-btn"
+>
+  View Booking
+</Link>
 
         </div>
 

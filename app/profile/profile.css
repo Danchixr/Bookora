@@ -1,0 +1,379 @@
+.profile-page {
+  min-height: 100vh;
+  background: #fafafd;
+
+  padding: 18px 16px 100px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.profile-header {
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.profile-header h1 {
+  margin: 0;
+
+  font-size: 22px;
+  font-weight: 750;
+
+  color: #111;
+}
+
+.profile-menu-btn,
+.profile-notification {
+  position: relative;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  color: #171717;
+
+  padding: 0;
+}
+
+.notification-dot {
+  position: absolute;
+
+  top: 5px;
+  right: 6px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #6c4cf1;
+}
+
+
+/* =========================
+   PROFILE HERO
+========================= */
+
+.profile-hero {
+  padding: 28px 10px 22px;
+
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    #eadcff,
+    #f5eaff
+  );
+
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+
+/* Profile picture */
+
+.profile-picture-wrapper {
+  position: relative;
+
+  width: 128px;
+  height: 128px;
+
+  margin: 0 auto 12px;
+}
+
+.profile-picture {
+  width: 128px;
+  height: 128px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 3px solid white;
+}
+
+
+/* Camera */
+
+.camera-btn {
+  position: absolute;
+
+  right: -3px;
+  bottom: 2px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 3px solid white;
+
+  border-radius: 50%;
+
+  background: #111;
+
+  color: white;
+}
+
+
+/* Name */
+
+.profile-hero h2 {
+  margin: 0 0 4px;
+
+  font-size: 27px;
+  font-weight: 750;
+
+  color: #111;
+}
+
+.profile-hero > p {
+  margin: 0;
+
+  font-size: 15px;
+
+  color: #4f4f62;
+}
+
+
+/* Business dashboard */
+
+.business-dashboard-card {
+  width: 100%;
+
+  margin-top: 24px;
+
+  padding: 13px 14px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  border: none;
+
+  border-radius: 17px;
+
+  background: white;
+
+  text-align: left;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+  color: #161634;
+}
+
+.business-dashboard-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #f0eaff;
+
+  color: #6c4cf1;
+}
+
+.business-dashboard-text {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.business-dashboard-text strong {
+  font-size: 16px;
+}
+
+.business-dashboard-text span {
+  font-size: 13px;
+
+  color: #666;
+}
+
+
+/* =========================
+   PROFILE CARDS
+========================= */
+
+.profile-card {
+  margin-bottom: 18px;
+
+  padding: 0 14px;
+
+  border-radius: 20px;
+
+  background: white;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.035);
+
+  overflow: hidden;
+}
+
+
+/* Individual row */
+
+.profile-item {
+  width: 100%;
+
+  min-height: 88px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 14px 4px;
+
+  border: none;
+
+  border-bottom: 1px solid #eeeeee;
+
+  background: transparent;
+
+  text-align: left;
+}
+
+.profile-item:last-child {
+  border-bottom: none;
+}
+
+
+/* Icon */
+
+.profile-item-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #f1edff;
+
+  color: #17173d;
+}
+
+
+/* Text */
+
+.profile-item-content {
+  flex: 1;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.profile-item-title {
+  font-size: 13px;
+
+  color: #56566d;
+}
+
+.profile-item-value {
+  font-size: 15px;
+
+  color: #15152f;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* Arrow */
+
+.profile-item-arrow {
+  flex-shrink: 0;
+
+  color: #8585a0;
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-btn {
+  width: 100%;
+
+  height: 54px;
+
+  margin: 2px 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background: white;
+
+  color: red;
+
+  font-size: 16px;
+  font-weight: 650;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 380px) {
+
+  .profile-hero h2 {
+    font-size: 24px;
+  }
+
+  .profile-picture-wrapper,
+  .profile-picture {
+    width: 115px;
+    height: 115px;
+  }
+
+  .profile-item {
+    min-height: 80px;
+  }
+
+}

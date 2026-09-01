@@ -1,0 +1,195 @@
+.customer-bookings-page {
+  min-height: 100vh;
+  background: #fff;
+
+  padding: 24px 16px 100px;
+
+  box-sizing: border-box;
+}
+
+
+/* Header */
+
+.bookings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+}
+
+.bookings-header h1 {
+  margin: 0;
+
+  font-size: 26px;
+  font-weight: 750;
+  color: #171717;
+}
+
+.bookings-notification {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  color: #222;
+}
+
+
+/* Notification dot */
+
+.notification-dot {
+  position: absolute;
+
+  top: 8px;
+  right: 7px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #6c4cf1;
+}
+
+
+/* Tabs */
+
+.booking-tabs {
+  display: flex;
+  gap: 8px;
+
+  margin-bottom: 22px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.booking-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.booking-tab {
+  flex: 1;
+
+  min-width: 105px;
+
+  padding: 11px 16px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #f5f5f7;
+
+  color: #777;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.booking-tab.active {
+  background: #6c4cf1;
+  color: #fff;
+}
+
+
+/* Booking list */
+
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+/* Booking card */
+
+.booking-card {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 12px;
+
+  text-align: left;
+
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+
+  background: #fff;
+
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+
+  cursor: pointer;
+}
+
+
+/* Image */
+
+.booking-image {
+  width: 92px;
+  height: 92px;
+
+  flex-shrink: 0;
+
+  border-radius: 14px;
+
+  object-fit: cover;
+}
+
+
+/* Info */
+
+.booking-info {
+  min-width: 0;
+}
+
+.booking-info h2 {
+  margin: 0 0 4px;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  color: #171717;
+}
+
+.booking-service {
+  margin: 0 0 12px;
+
+  font-size: 14px;
+
+  color: #777;
+}
+
+
+/* Date + time */
+
+.booking-details {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  font-size: 12px;
+
+  color: #666;
+}
+
+.booking-details span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
