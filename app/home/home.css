@@ -774,3 +774,19 @@
   align-items: center;
   justify-content: center;
 }
+
+/*  NOTIFICATION  */
+
+.success-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #5427d8;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}

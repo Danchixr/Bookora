@@ -27,8 +27,10 @@ export default function MobileDashboard({
   return (
     <div className="mobile-dashboard">
       
- <MobileHeader
+<MobileHeader
+  business={business}
   onMenuClick={() => setMenuOpen(prev => !prev)}
+  menuOpen={menuOpen}
 />
 
  {menuOpen && (
@@ -44,7 +46,7 @@ export default function MobileDashboard({
   </>
 )}
 
-<HeroCard />
+<HeroCard bookings={bookings} />
 
 <OverviewSection>
 

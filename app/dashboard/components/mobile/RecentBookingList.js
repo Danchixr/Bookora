@@ -2,7 +2,15 @@ export default function RecentBookingList({
   bookings,
 }) {
 
-  const recentBookings = bookings?.slice(0, 3) || [];
+  const recentBookings =
+  [...(bookings || [])]
+    .sort((a, b) => {
+      const dateA = new Date(`${a.date}T${a.time}`);
+      const dateB = new Date(`${b.date}T${b.time}`);
+
+      return dateB - dateA;
+    })
+    .slice(0, 3);
 
   return (
 

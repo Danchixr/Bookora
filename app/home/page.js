@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 import "./home.css";
 
@@ -55,7 +57,38 @@ const featuredBusinesses = [
   },
 ];
 
+
+
 export default function HomePage() {
+  const [notification, setNotification] = useState("");
+
+const [user, setUser] = useState(null);
+
+useEffect(() => {
+  async function getUser() {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    setUser(user);
+  }
+
+  getUser();
+}, []);
+
+useEffect(() => {
+  const businessCreated = sessionStorage.getItem("businessCreated");
+
+  if (businessCreated) {
+    setNotification("Business created successfully 🎉");
+    sessionStorage.removeItem("businessCreated");
+
+    setTimeout(() => {
+      setNotification("");
+    }, 3000);
+  }
+}, []);
+
   const [menuOpen, setMenuOpen] = useState(false);
   return (
   <>
@@ -73,7 +106,15 @@ export default function HomePage() {
     )}
 
     <main className="home-page">
+    
+    {user && <p>Logged in as: {user.email}</p>}
 
+    {notification && (
+  <div className="success-notification">
+    {notification}
+  </div>
+)}
+    
       <HomeHeader
         onMenuClick={() => setMenuOpen(prev => !prev)}
       />
@@ -97,3 +138,4 @@ export default function HomePage() {
   </>
 );
 }
+

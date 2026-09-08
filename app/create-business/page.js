@@ -1,5 +1,9 @@
 "use client";
 
+import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
+
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import "./create-business.css"; 
@@ -7,8 +11,64 @@ import ImageUpload from "@/app/add-service/components/ImageUpload";
 import WorkingDaysPicker from "@/app/settings/components/WorkingDaysPicker";
 
 export default function Page() {
+ const router = useRouter();
+
+ const [loading, setLoading] = useState(false);
+ const [message, setMessage] = useState("");
+
+ async function handleSubmit(e) {
+  e.preventDefault();
+
+  setLoading(true);
+  setMessage("");
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    setMessage("You must be logged in.");
+    setLoading(false);
+    return;
+  }
+
+  const form = e.target;
+const formData = new FormData(form);
+
+  const { error } = await supabase
+    .from("businesses")
+    .insert({
+      user_id: user.id,
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      category: formData.get("category"),
+      description: formData.get("description"),
+      location: formData.get("location"),
+      city: formData.get("city"),
+      state: formData.get("state"),
+      google_maps_url: formData.get("google_maps_url"),
+      opening_time: formData.get("opening_time"),
+      closing_time: formData.get("closing_time"),
+      working_days: JSON.parse(formData.get("working_days")),
+    });
+
+if (error) {
+  console.error("BUSINESS CREATION ERROR:", JSON.stringify(error, null, 2));
+  setMessage(error.message || "Something went wrong.");
+} else {
+  sessionStorage.setItem("businessCreated", "true");
+  router.push("/home");
+
+}
+
+  setLoading(false);
+}
+
   return (
     <main className="create-business-page">
+    
+    <form onSubmit={handleSubmit}>
 
      <section className="form-card">
 
@@ -205,11 +265,19 @@ export default function Page() {
 
 <div className="submit-wrapper">
 
-  <button className="create-business-btn">
-    Create Business
-  </button>
+  <button
+  type="submit"
+  className="create-business-btn"
+  disabled={loading}
+>
+  {loading ? "Creating Business..." : "Create Business"}
+</button>
+
+{message && <p>{message}</p>}
 
 </div>
+
+</form>
     </main>
   );
 }

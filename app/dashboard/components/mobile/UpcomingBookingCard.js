@@ -4,9 +4,24 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-export default function UpcomingBookingCard({ bookings }) {
+export default function UpcomingBookingCard({ bookings = [] }) {
 
-  const upcoming = bookings[0];
+  const now = new Date();
+
+  const upcoming = bookings
+    .filter((booking) => {
+      const bookingDateTime = new Date(
+        `${booking.date}T${booking.time}`
+      );
+
+      return bookingDateTime > now;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(`${a.date}T${a.time}`);
+      const dateB = new Date(`${b.date}T${b.time}`);
+
+      return dateA - dateB;
+    })[0];
 
   return (
     <section className="upcoming-card">
@@ -25,11 +40,9 @@ export default function UpcomingBookingCard({ bookings }) {
         </div>
       </div>
 
-
       {upcoming ? (
 
         <div className="booking-card">
-
 
           <div className="customer-info">
 
@@ -50,24 +63,19 @@ export default function UpcomingBookingCard({ bookings }) {
 
           </div>
 
-
-
           <div className="booking-details">
 
             <span>
-              <CalendarDays size={18}/>
+              <CalendarDays size={18} />
               {upcoming.date}
             </span>
 
-
             <span>
-              <Clock3 size={18}/>
+              <Clock3 size={18} />
               {upcoming.time}
             </span>
 
           </div>
-
-
 
           <div className="booking-action">
 
@@ -75,11 +83,9 @@ export default function UpcomingBookingCard({ bookings }) {
               {upcoming.status}
             </span>
 
-
-            <ChevronRight size={24}/>
+            <ChevronRight size={24} />
 
           </div>
-
 
         </div>
 

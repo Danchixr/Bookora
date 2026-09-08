@@ -7,8 +7,69 @@ import {
   Heart,
   User,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Sidebar({ onClose }) {
+ const [hasBusiness, setHasBusiness] = useState(false);
+
+ useEffect(() => {
+  async function checkBusiness() {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) return;
+
+    const { data: business } = await supabase
+      .from("businesses")
+      .select("id")
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    setHasBusiness(!!business);
+  }
+
+  checkBusiness();
+}, []);
+
+  const router = useRouter();
+
+  async function handleBusinessClick() {
+    // Get the currently logged-in user
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    // Check if this user already has a business
+    const { data: business, error } = await supabase
+      .from("businesses")
+      .select("id")
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    onClose();
+
+    if (business) {
+      // User already has a business
+      router.push("/dashboard");
+    } else {
+      // User doesn't have a business yet
+      router.push("/create-business");
+    }
+  }
+
   return (
     <aside className="mobile-sidebar">
 
@@ -34,77 +95,76 @@ export default function Sidebar({ onClose }) {
         </button>
 
       </div>
-    
-    {/* Customer Profile */}
-<div className="sidebar-profile">
 
-  <img
-    src="https://i.pravatar.cc/150?img=12"
-    alt="Profile"
-    className="sidebar-profile-image"
-  />
+      {/* Customer Profile */}
+      <div className="sidebar-profile">
 
-  <div className="sidebar-profile-info">
+        <img
+          src="https://i.pravatar.cc/150?img=12"
+          alt="Profile"
+          className="sidebar-profile-image"
+        />
 
-    <h3>Chisom</h3>
+        <div className="sidebar-profile-info">
 
-    <p>Customer</p>
+          <h3>Chisom</h3>
 
-  </div>
+          <p>Customer</p>
 
-</div>
+        </div>
 
-<nav className="sidebar-nav">
+      </div>
 
-  <a
-    href="/home"
-    className="sidebar-nav-item active"
-    onClick={onClose}
-  >
-    <Home size={20} />
-    <span>Home</span>
-  </a>
+      <nav className="sidebar-nav">
 
-  <a
-    href="/mybookings"
-    className="sidebar-nav-item"
-    onClick={onClose}
-  >
-    <CalendarDays size={20} />
-    <span>My Bookings</span>
-  </a>
+        <a
+          href="/home"
+          className="sidebar-nav-item active"
+          onClick={onClose}
+        >
+          <Home size={20} />
+          <span>Home</span>
+        </a>
 
-  <a
-    href="/favourites"
-    className="sidebar-nav-item"
-    onClick={onClose}
-  >
-    <Heart size={20} />
-    <span>Favourites</span>
-  </a>
+        <a
+          href="/mybookings"
+          className="sidebar-nav-item"
+          onClick={onClose}
+        >
+          <CalendarDays size={20} />
+          <span>My Bookings</span>
+        </a>
 
-  <a
-    href="/profile"
-    className="sidebar-nav-item"
-    onClick={onClose}
-  >
-    <User size={20} />
-    <span>Profile</span>
-  </a>
+        <a
+          href="/favourites"
+          className="sidebar-nav-item"
+          onClick={onClose}
+        >
+          <Heart size={20} />
+          <span>Favourites</span>
+        </a>
 
-</nav>
+        <a
+          href="/profile"
+          className="sidebar-nav-item"
+          onClick={onClose}
+        >
+          <User size={20} />
+          <span>Profile</span>
+        </a>
 
-<div className="sidebar-bottom">
+      </nav>
 
-  <a
-    href="/dashboard"
-    className="visit-dashboard-btn"
-    onClick={onClose}
-  >
-    Visit Dashboard
-  </a>
+      <div className="sidebar-bottom">
 
-</div>
+        <button
+          className="visit-dashboard-btn"
+          onClick={handleBusinessClick}
+        >
+          {hasBusiness ? "Visit Dashboard" : "Create Business"}
+        </button>
+
+      </div>
 
     </aside>
   );
