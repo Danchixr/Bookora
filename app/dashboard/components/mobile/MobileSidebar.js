@@ -7,18 +7,22 @@ import { X } from "lucide-react";
 export default function MobileSidebar({ onClose }) {
   const pathname = usePathname();
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "300px",
-        height: "100vh",
-        background: "#fff",
-        zIndex: 99999,
-        padding: "24px",
-      }}
-    >
+   <div
+  style={{
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "300px",
+    height: "100dvh",
+    background: "#fff",
+    zIndex: 99999,
+    padding: "24px",
+    boxSizing: "border-box",
+    overflowY: "auto",
+    overscrollBehavior: "contain",
+    WebkitOverflowScrolling: "touch",
+  }}
+>
       <button
         onClick={onClose}
         style={{
@@ -237,21 +241,27 @@ export default function MobileSidebar({ onClose }) {
   </p>
 </div>
 
-<button
+<Link
+  href="/home"
+  onClick={onClose}
   style={{
     width: "100%",
     marginTop: "40px",
     padding: "14px",
     borderRadius: "14px",
-    border: "1px solid #FFB8B8",
-    background: "#FFF5F5",
-    color: "#E53935",
+    border: "1px solid #DDD4FF",
+    background: "#F5F2FF",
+    color: "#5427D8",
     fontWeight: "600",
-    cursor: "pointer",
+    textDecoration: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxSizing: "border-box",
   }}
 >
-  Log out
-</button>
+  ← Back to Home
+</Link>
     </div>
   );
   

@@ -1,26 +1,30 @@
-
 import {
   ChevronLeft,
   Search,
   Heart,
 } from "lucide-react";
-import Link from "next/link"
 
-export default function BusinessHeader() {
+import Link from "next/link";
+
+export default function BusinessHeader({ business }) {
   return (
     <section className="business-header">
 
-      <img
-        src="https://picsum.photos/1200/450"
-        alt="Business Banner"
-        className="business-banner"
-      />
+      {business?.banner_url ? (
+        <img
+          src={business.banner_url}
+          alt={`${business.name} Banner`}
+          className="business-banner"
+        />
+      ) : (
+        <div className="business-banner" />
+      )}
 
       <div className="header-overlay">
 
-       <Link href="/home" className="header-btn">
-  <ChevronLeft size={22} />
-</Link>
+        <Link href="/home" className="header-btn">
+          <ChevronLeft size={22} />
+        </Link>
 
         <div className="header-actions">
 
@@ -36,7 +40,7 @@ export default function BusinessHeader() {
 
       </div>
 
-      <button className="whatsapp-btn"> 💬 </button>
+      <button className="whatsapp-btn">💬</button>
 
     </section>
   );

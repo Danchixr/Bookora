@@ -3,46 +3,19 @@
 import { useState } from "react";
 import BookingModal from "./BookingModal";
 
-export default function ServicesSection() {
+export default function ServicesSection({
+  services = [],
+  business,
+}) {
   const [selectedService, setSelectedService] = useState(null);
 
-  const services = [
-    {
-      id: 1,
-      name: "Swedish Massage",
-      duration: "60 mins",
-      price: "₦25,000",
-      image: "https://picsum.photos/300/200?1",
-      description:
-        "Relax and release tension with our soothing Swedish massage therapy.",
-      deposit: "₦5,000",
-    },
-    {
-      id: 2,
-      name: "Deep Tissue Massage",
-      duration: "90 mins",
-      price: "₦35,000",
-      image: "https://picsum.photos/300/200?2",
-      description:
-        "Relieve muscle tension and reduce stress with our deep tissue massage therapy.",
-      deposit: "₦7,000",
-    },
-    {
-      id: 3,
-      name: "Facial Treatment",
-      duration: "45 mins",
-      price: "₦18,000",
-      image: "https://picsum.photos/300/200?3",
-      description:
-        "A refreshing facial treatment designed to leave your skin feeling clean and refreshed.",
-      deposit: "₦3,600",
-    },
-  ];
+  function formatPrice(price) {
+    return `₦${Number(price || 0).toLocaleString("en-NG")}`;
+  }
 
   return (
     <>
       <section className="services-section">
-
         <div className="section-header">
           <h2>Services</h2>
 
@@ -52,58 +25,62 @@ export default function ServicesSection() {
         </div>
 
         <div className="services-list">
+          {services.length === 0 ? (
+            <p>No services available yet.</p>
+          ) : (
+            services.map((service) => (
+              <div
+                key={service.id}
+                className="service-card"
+              >
+                {service.image_url ? (
+                  <img
+                    src={service.image_url}
+                    alt={service.name}
+                    className="service-image"
+                  />
+                ) : (
+                  <div className="service-image" />
+                )}
 
-          {services.map((service) => (
+                <div className="service-info">
+                  <h3>{service.name}</h3>
 
-            <div
-              key={service.id}
-              className="service-card"
-            >
+                  <p className="service-duration">
+                    {service.duration} mins
+                  </p>
 
-              <img
-                src={service.image}
-                alt={service.name}
-                className="service-image"
-              />
+                  <div className="service-footer">
+                    <span className="service-price">
+                      {formatPrice(service.price)}
+                    </span>
 
-              <div className="service-info">
-
-                <h3>{service.name}</h3>
-
-                <p className="service-duration">
-                  {service.duration}
-                </p>
-
-                <div className="service-footer">
-
-                  <span className="service-price">
-                    {service.price}
-                  </span>
-
-                  <button
-                    className="service-select-btn"
-                    onClick={() => setSelectedService(service)}
-                  >
-                    Select
-                  </button>
-
+                    <button
+                      className="service-select-btn"
+                      onClick={() => setSelectedService(service)}
+                    >
+                      Select
+                    </button>
+                  </div>
                 </div>
-
               </div>
-
-            </div>
-
-          ))}
-
+            ))
+          )}
         </div>
-
       </section>
 
       {selectedService && (
-        <BookingModal
-          service={selectedService}
-          onClose={() => setSelectedService(null)}
-        />
+       <BookingModal
+  service={{
+    ...selectedService,
+    image: selectedService.image_url,
+    duration: `${selectedService.duration} mins`,
+    price: formatPrice(selectedService.price),
+    deposit: formatPrice(selectedService.deposit_amount),
+  }}
+  business={business}
+  onClose={() => setSelectedService(null)}
+/>
       )}
     </>
   );

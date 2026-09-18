@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useEffect } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 import "./home.css";
 
@@ -27,115 +26,137 @@ const upcomingBookings = [
   },
 ];
 
-const featuredBusinesses = [
-  {
-    id: 1,
-    name: "Glow Spa",
-    category: "Spa & Wellness",
-    rating: "4.9",
-    location: "Lekki",
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&auto=format&fit=crop",
-  },
-  {
-    id: 2,
-    name: "Elite Hair Studio",
-    category: "Beauty & Salon",
-    rating: "4.8",
-    location: "Victoria Island",
-    image:
-      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    name: "FitZone",
-    category: "Fitness",
-    rating: "4.7",
-    location: "Ikeja",
-    image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop",
-  },
-];
-
-
-
 export default function HomePage() {
+  const [supabase] = useState(() => createClient());
+
   const [notification, setNotification] = useState("");
-
-const [user, setUser] = useState(null);
-
-useEffect(() => {
-  async function getUser() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    setUser(user);
-  }
-
-  getUser();
-}, []);
-
-useEffect(() => {
-  const businessCreated = sessionStorage.getItem("businessCreated");
-
-  if (businessCreated) {
-    setNotification("Business created successfully 🎉");
-    sessionStorage.removeItem("businessCreated");
-
-    setTimeout(() => {
-      setNotification("");
-    }, 3000);
-  }
-}, []);
-
+  const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [featuredBusinesses, setFeaturedBusinesses] = useState([]);
+  const [businessesLoading, setBusinessesLoading] = useState(true);
+
+  // Get logged-in user
+  useEffect(() => {
+    async function getUser() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      setUser(user);
+    }
+
+    getUser();
+  }, [supabase]);
+
+  // Show notification after creating a business
+  useEffect(() => {
+    const businessCreated = sessionStorage.getItem("businessCreated");
+
+    if (businessCreated) {
+      setNotification("Business created successfully 🎉");
+
+      sessionStorage.removeItem("businessCreated");
+
+      const timer = setTimeout(() => {
+        setNotification("");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // Fetch real businesses from Supabase
+  useEffect(() => {
+    async function fetchBusinesses() {
+      setBusinessesLoading(true);
+
+      const { data, error } = await supabase
+        .from("businesses")
+        .select(`
+          id,
+          name,
+          category,
+          location,
+          city,
+          state,
+          logo_url,
+          banner_url
+        `)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("BUSINESSES FETCH ERROR:", error);
+
+        setFeaturedBusinesses([]);
+        setBusinessesLoading(false);
+
+        return;
+      }
+
+      // Keep the image field expected by the existing business cards.
+      const businesses = (data || []).map((business) => ({
+        ...business,
+        image: business.banner_url || business.logo_url || "",
+      }));
+
+      setFeaturedBusinesses(businesses);
+      setBusinessesLoading(false);
+    }
+
+    fetchBusinesses();
+  }, [supabase]);
+
   return (
-  <>
-    {menuOpen && (
-      <>
-        <div
-          className="sidebar-overlay"
-          onClick={() => setMenuOpen(false)}
-        />
+    <>
+      {menuOpen && (
+        <>
+          <div
+            className="sidebar-overlay"
+            onClick={() => setMenuOpen(false)}
+          />
 
-        <Sidebar
-          onClose={() => setMenuOpen(false)}
-        />
-      </>
-    )}
-
-    <main className="home-page">
-    
-    {user && <p>Logged in as: {user.email}</p>}
-
-    {notification && (
-  <div className="success-notification">
-    {notification}
-  </div>
-)}
-    
-      <HomeHeader
-        onMenuClick={() => setMenuOpen(prev => !prev)}
-      />
-
-      <Greeting />
-
-      <CategoriesSection />
-
-      {upcomingBookings.length > 0 && (
-        <UpcomingBookings bookings={upcomingBookings} />
+          <Sidebar
+            onClose={() => setMenuOpen(false)}
+          />
+        </>
       )}
 
-      <FeaturedBusinesses
-        businesses={featuredBusinesses}
-      />
-    
-    <RecentlyVisited />
-    
-    </main>
-    <BottomNavigation />
-  </>
-);
-}
+      <main className="home-page">
+        {user && (
+          <p>Logged in as: {user.email}</p>
+        )}
 
+        {notification && (
+          <div className="success-notification">
+            {notification}
+          </div>
+        )}
+
+        <HomeHeader
+          onMenuClick={() => setMenuOpen((prev) => !prev)}
+        />
+
+        <Greeting />
+
+        <CategoriesSection />
+
+        {upcomingBookings.length > 0 && (
+          <UpcomingBookings bookings={upcomingBookings} />
+        )}
+
+        {businessesLoading ? (
+          <p>Loading businesses...</p>
+        ) : (
+          <FeaturedBusinesses
+            businesses={featuredBusinesses}
+          />
+        )}
+
+        <RecentlyVisited />
+      </main>
+
+      <BottomNavigation />
+    </>
+  );
+}
