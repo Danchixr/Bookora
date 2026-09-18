@@ -1,27 +1,41 @@
 "use server";
 
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
-export async function updateBusinessProfile(formData) {
+async function getCurrentBusiness() {
+  const supabase = await createClient();
 
-  const { data: business } = await supabase
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error("You must be logged in.");
+  }
+
+  const { data: business, error } = await supabase
     .from("businesses")
     .select("id")
-    .limit(1)
-    .single();
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   if (!business) {
-    throw new Error("Business not found.");
+    throw new Error("Business profile not found.");
   }
-  console.log({
-  name: formData.get("name"),
-  phone: formData.get("phone"),
-  email: formData.get("email"),
-  description: formData.get("description"),
-  logo_url: formData.get("logo_url"),
-  banner_url: formData.get("banner_url"),
-});
+
+  return {
+    supabase,
+    business,
+  };
+}
+
+export async function updateBusinessProfile(formData) {
+  const { supabase, business } = await getCurrentBusiness();
 
   const updates = {
     name: formData.get("name"),
@@ -42,14 +56,13 @@ export async function updateBusinessProfile(formData) {
   }
 
   revalidatePath("/settings");
+  revalidatePath("/dashboard");
+  revalidatePath("/public-business-page");
+  revalidatePath("/home");
 }
 
 export async function updateBusinessLocation(formData) {
-  const { data: business } = await supabase
-    .from("businesses")
-    .select("id")
-    .limit(1)
-    .single();
+  const { supabase, business } = await getCurrentBusiness();
 
   const updates = {
     location: formData.get("location"),
@@ -63,30 +76,28 @@ export async function updateBusinessLocation(formData) {
     .update(updates)
     .eq("id", business.id);
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 
   revalidatePath("/settings");
+  revalidatePath("/dashboard");
+  revalidatePath("/public-business-page");
+  revalidatePath("/home");
 }
 
 export async function updateBusinessHours(formData) {
+  const { supabase, business } = await getCurrentBusiness();
 
-  
+  let workingDays = [];
 
-  const { data: business } = await supabase
-    .from("businesses")
-    .select("id")
-    .limit(1)
-    .single();
-
-  const workingDays = JSON.parse(
-    formData.get("working_days") || "[]"
-  );
-
-  console.log({
-  opening_time: formData.get("opening_time"),
-  closing_time: formData.get("closing_time"),
-  working_days: formData.get("working_days"),
-});
+  try {
+    workingDays = JSON.parse(
+      formData.get("working_days") || "[]"
+    );
+  } catch {
+    throw new Error("Invalid working days.");
+  }
 
   const updates = {
     opening_time: formData.get("opening_time"),
@@ -94,16 +105,17 @@ export async function updateBusinessHours(formData) {
     working_days: workingDays,
   };
 
-  const { data, error } = await supabase
-  .from("businesses")
-  .update(updates)
-  .eq("id", business.id)
-  .select();
+  const { error } = await supabase
+    .from("businesses")
+    .update(updates)
+    .eq("id", business.id);
 
-console.log("Updated row:", data);
-console.log("Supabase error:", error);
+  if (error) {
+    throw new Error(error.message);
+  }
 
-if (error) throw new Error(error.message);
-
-revalidatePath("/settings");
+  revalidatePath("/settings");
+  revalidatePath("/dashboard");
+  revalidatePath("/public-business-page");
+  revalidatePath("/home");
 }

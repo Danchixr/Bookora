@@ -3,23 +3,23 @@ import {
   Search,
   Heart,
 } from "lucide-react";
-import Link from "next/link"
+import Link from "next/link";
 
-export default function BusinessHeader() {
+export default function BusinessHeader({ business }) {
   return (
     <section className="business-header">
 
       <img
-        src="https://picsum.photos/1200/450"
-        alt="Business Banner"
+        src={business?.banner_url || "https://picsum.photos/1200/450"}
+        alt={`${business?.name || "Business"} Banner`}
         className="business-banner"
       />
 
       <div className="header-overlay">
 
-       <Link href="/dashboard" className="header-btn">
-  <ChevronLeft size={22} />
-</Link>
+        <Link href="/dashboard" className="header-btn">
+          <ChevronLeft size={22} />
+        </Link>
 
         <div className="header-actions">
 
@@ -35,7 +35,9 @@ export default function BusinessHeader() {
 
       </div>
 
-      <button className="whatsapp-btn"> 💬 </button>
+      <button className="whatsapp-btn">
+        💬
+      </button>
 
     </section>
   );

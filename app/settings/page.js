@@ -10,30 +10,49 @@ import BookingSettingsCard from "./components/BookingSettingsCard";
 import BankCard from "./components/BankCard";
 import SecurityCard from "./components/SecurityCard";
 import DangerZoneCard from "./components/DangerZoneCard";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function SettingsPage() {
-
   const pendingBookings = await getPendingBookingsCount();
 
-  const { data: business } = await supabase
-  .from("businesses")
-  .select("*")
-  .limit(1)
-  .single();
+const supabase = await createClient();
+
+const {
+  data: { user },
+} = await supabase.auth.getUser();
+
+let business = null;
+
+if (user) {
+  const { data, error } = await supabase
+    .from("businesses")
+    .select("*")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("BUSINESS FETCH ERROR:", error);
+  }
+
+  business = data;
+}
 
   return (
     <>
       <SettingsHeader />
-    <BusinessProfileCard business={business} />
 
-<LocationCard business={business} />
+      <BusinessProfileCard business={business} />
 
-<BusinessHoursCard business={business} />
+      <LocationCard business={business} />
 
-     <BookingSettingsCard />
-     <BankCard />
-     <SecurityCard />
+      <BusinessHoursCard business={business} />
+
+      <BookingSettingsCard />
+
+      <BankCard />
+
+      <SecurityCard />
+
       <DangerZoneCard />
 
       <BottomNavigation

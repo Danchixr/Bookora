@@ -1,10 +1,6 @@
 "use client";
 import { useState } from "react";
 
-import {
-  getBookings,
-  getPendingBookingsCount,
-} from "@/lib/bookings";
 
 import MobileHeader from "./MobileHeader";
 import HeroCard from "./HeroCard";

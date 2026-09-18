@@ -1,7 +1,7 @@
 import AccordionCard from "./AccordionCard";
 import { updateBusinessLocation } from "../actions";
 
-export default function LocationCard() {
+export default function LocationCard({ business }) {
 
   return (
 
@@ -18,7 +18,7 @@ export default function LocationCard() {
           <input
            name="location"
             type="text"
-            defaultValue="15 Admiralty Way"
+            defaultValue={business?.location || ""}
           />
 
         </div>
@@ -30,7 +30,7 @@ export default function LocationCard() {
           <input
             name="city"
             type="text"
-            defaultValue="Lekki"
+            defaultValue={business?.city || ""}
           />
 
         </div>
@@ -42,7 +42,7 @@ export default function LocationCard() {
           <input
            name="state"
             type="text"
-            defaultValue="Lagos"
+            defaultValue={business?.state || ""}
           />
 
         </div>
@@ -52,9 +52,11 @@ export default function LocationCard() {
           <label>Google Maps Link</label>
 
           <input
-            type="text"
-            placeholder="Paste Google Maps URL"
-          />
+  name="google_maps_url"
+  type="text"
+  placeholder="Paste Google Maps URL"
+  defaultValue={business?.google_maps_url || ""}
+/>
 
         </div>
 
