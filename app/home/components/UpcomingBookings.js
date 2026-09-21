@@ -48,8 +48,8 @@ export default function UpcomingBookings({ bookings }) {
 
           </div>
 
-          <Link
-  href="/booking-details"
+<Link
+  href={`/booking-details?id=${booking.id}`}
   className="view-booking-btn"
 >
   View Booking

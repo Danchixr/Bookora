@@ -401,3 +401,13 @@
 
     line-height:1;
 }
+
+
+
+/* Expired booking status */
+
+.booking-status.expired {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+}

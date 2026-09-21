@@ -37,8 +37,9 @@ export default function MobileDashboard({
     />
 
     <MobileSidebar
-      onClose={() => setMenuOpen(false)}
-    />
+  business={business}
+  onClose={() => setMenuOpen(false)}
+/>
   </>
 )}
 

@@ -1,5 +1,9 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+
 import {
   Bell,
   Menu,
@@ -21,6 +25,36 @@ import BottomNavigation from "../home/components/BottomNavigation";
 import "./profile.css";
 
 export default function ProfilePage() {
+  const router = useRouter();
+
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [logoutError, setLogoutError] = useState("");
+
+  async function handleLogout() {
+    if (loggingOut) return;
+
+    setLoggingOut(true);
+    setLogoutError("");
+
+    try {
+      const supabase = createClient();
+
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        throw error;
+      }
+
+      // Replace the current page so Back doesn't return to Profile.
+      router.replace("/login");
+      router.refresh();
+    } catch (error) {
+      console.error("LOGOUT ERROR:", error);
+      setLogoutError("Unable to log out. Please try again.");
+      setLoggingOut(false);
+    }
+  }
+
   return (
     <main className="profile-page">
 
@@ -66,7 +100,11 @@ export default function ProfilePage() {
 
 
         {/* Business Dashboard */}
-        <button className="business-dashboard-card">
+        <button
+            type="button"
+            className="business-dashboard-card"
+            onClick={() => router.push("/dashboard")}
+           >
 
           <div className="business-dashboard-icon">
             <Store size={23} />
@@ -149,14 +187,25 @@ export default function ProfilePage() {
       </section>
 
 
-      {/* Logout */}
-      <button className="logout-btn">
+    {/* Logout */}
+<button
+  type="button"
+  className="logout-btn"
+  onClick={handleLogout}
+  disabled={loggingOut}
+>
+  <LogOut size={20} />
 
-        <LogOut size={20} />
+  <span>
+    {loggingOut ? "Logging out..." : "Log Out"}
+  </span>
+</button>
 
-        <span>Log Out</span>
-
-      </button>
+{logoutError && (
+  <p role="alert" style={{ color: "#c62828", textAlign: "center" }}>
+    {logoutError}
+  </p>
+)}
 
 
       <BottomNavigation />

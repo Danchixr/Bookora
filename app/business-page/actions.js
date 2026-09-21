@@ -27,6 +27,18 @@ export async function createBooking({
   }
 
   const supabase = await createClient();
+  
+ const {
+  data: { user },
+  error: authError,
+} = await supabase.auth.getUser();
+
+if (authError || !user) {
+  return {
+    success: false,
+    error: "Please log in to make a booking.",
+  };
+}
 
   // Fetch the actual service and its business from the database.
   const { data: service, error: serviceError } = await supabase
@@ -44,7 +56,7 @@ export async function createBooking({
 
   const { data: business, error: businessError } = await supabase
     .from("businesses")
-    .select("id, opening_time, closing_time, working_days")
+    .select("id, user_id, opening_time, closing_time, working_days")
     .eq("id", service.business_id)
     .maybeSingle();
 
@@ -110,15 +122,16 @@ export async function createBooking({
   const { data: booking, error: insertError } = await supabase
     .from("bookings")
     .insert({
-      business_id: business.id,
-      service_id: service.id,
-      customer_name: name,
-      customer_phone: phone,
-      date,
-      time,
-      status: "pending",
-      payment_status: "unpaid",
-    })
+  business_id: business.id,
+  service_id: service.id,
+  customer_id: user.id,
+  customer_name: name,
+  customer_phone: phone,
+  date,
+  time,
+  status: "pending",
+  payment_status: "unpaid",
+})
     .select("id")
     .single();
 

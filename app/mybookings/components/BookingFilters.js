@@ -6,12 +6,13 @@ export default function BookingFilters({
 }) {
 
   const filters = [
-    "all",
-    "pending",
-    "confirmed",
-    "completed",
-    "cancelled",
-  ];
+  "all",
+  "pending",
+  "confirmed",
+  "completed",
+  "cancelled",
+  "expired",
+];
 
   return (
     <div className="booking-filters">

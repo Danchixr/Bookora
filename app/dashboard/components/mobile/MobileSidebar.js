@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 
-export default function MobileSidebar({ onClose }) {
+export default function MobileSidebar({ business, onClose }) {
   const pathname = usePathname();
   return (
    <div
@@ -81,15 +81,36 @@ export default function MobileSidebar({ onClose }) {
     marginBottom: "36px",
   }}
 >
+  {business?.logo_url ? (
   <img
-    src="https://i.pravatar.cc/150?img=32"
-    alt=""
+    src={business.logo_url}
+    alt={`${business.name} logo`}
     style={{
       width: "56px",
       height: "56px",
       borderRadius: "50%",
+      objectFit: "cover",
     }}
   />
+) : (
+  <div
+    style={{
+      width: "56px",
+      height: "56px",
+      borderRadius: "50%",
+      background: "#F1EDFF",
+      color: "#5427D8",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontWeight: "700",
+      fontSize: "22px",
+      flexShrink: 0,
+    }}
+  >
+    {business?.name?.charAt(0)?.toUpperCase() || "?"}
+  </div>
+)}
 <Link
   href="/public-business-page"
   style={{
@@ -101,10 +122,10 @@ export default function MobileSidebar({ onClose }) {
     <h3
       style={{
         margin: 0,
-        fontSize: "18px",
+        fontSize: "20px",
       }}
     >
-      Glow Spa
+      {business?.name || "Your Business"}
     </h3>
 
     <p
@@ -114,7 +135,7 @@ export default function MobileSidebar({ onClose }) {
         fontSize: "14px",
       }}
     >
-      Spa & Wellness
+      {business?.category || "Business"}
     </p>
 
      <span

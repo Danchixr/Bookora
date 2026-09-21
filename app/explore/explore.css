@@ -228,3 +228,169 @@
   font-size: 12px;
   color: #666;
 }
+
+
+
+
+
+/* Interactive category selection */
+
+.explore-category {
+  cursor: pointer;
+}
+
+.explore-category.active {
+  background: #6c4cf1;
+  color: #fff;
+  border-color: #6c4cf1;
+}
+
+/* Filter panel */
+
+.explore-filter-panel {
+  margin-top: 14px;
+  padding: 18px;
+  border: 1px solid #eeeaf8;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.explore-filter-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.explore-filter-panel-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.explore-filter-panel-header button {
+  border: none;
+  background: transparent;
+  color: #6c4cf1;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.explore-filter-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+.explore-filter-label select {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  background: #f9f9fb;
+  color: #222;
+  font-size: 14px;
+  outline: none;
+}
+
+.explore-filter-label select:focus {
+  border-color: #6c4cf1;
+}
+
+.explore-apply-filters {
+  width: 100%;
+  height: 44px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 12px;
+  background: #6c4cf1;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Business cards */
+
+.explore-business-card {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.explore-business-info {
+  min-width: 0;
+}
+
+.explore-business-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.explore-business-image-placeholder {
+  width: 95px;
+  height: 95px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #f1edff;
+  color: #5427d8;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.explore-results-count {
+  color: #888;
+  font-size: 12px;
+}
+
+.explore-feedback {
+  padding: 24px 0;
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+}
+
+.explore-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 45px 20px;
+  border: 1px solid #eeeaf8;
+  border-radius: 20px;
+  text-align: center;
+  color: #6c4cf1;
+}
+
+.explore-empty-state h3 {
+  margin: 0;
+  color: #222;
+  font-size: 17px;
+}
+
+.explore-empty-state p {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.explore-empty-state button {
+  margin-top: 8px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #6c4cf1;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
