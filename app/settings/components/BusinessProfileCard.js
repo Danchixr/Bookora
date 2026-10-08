@@ -2,6 +2,7 @@ import { updateBusinessProfile } from "../actions";
 import AccordionCard from "./AccordionCard";
 import ImageUpload from "@/app/add-service/components/ImageUpload";
 import { updateBusinessHours } from "../actions";
+import { BUSINESS_CATEGORIES } from "@/lib/categories";
 
 export default function BusinessProfileCard({ business }) {
 
@@ -48,6 +49,29 @@ export default function BusinessProfileCard({ business }) {
           />
 
         </div>
+
+<div className="form-group">
+  <label>Business Category</label>
+
+  <select
+    name="category"
+    defaultValue={business?.category || ""}
+    required
+  >
+    <option value="" disabled>
+      Select Business Category
+    </option>
+
+    {BUSINESS_CATEGORIES.map((category) => (
+      <option
+        key={category.slug}
+        value={category.name}
+      >
+        {category.name}
+      </option>
+    ))}
+  </select>
+</div>
 
        <div className="form-group">
 

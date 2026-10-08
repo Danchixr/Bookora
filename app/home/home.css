@@ -201,20 +201,20 @@
 }
 
 .category-item img{
-    width:72px;
-    height:72px;
+    width:80px;
+    height:80px;
 
     border-radius:50%;
 
     object-fit:cover;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
     box-shadow:0 4px 16px rgba(0,0,0,.08);
 }
 
 .category-item span{
-    font-size:14px;
+    font-size:12px;
     font-weight:600;
 
     white-space:nowrap;
@@ -789,4 +789,30 @@
   font-weight: 500;
   z-index: 9999;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* PLACEHOLDER FOR FEATURED BUSINESS */
+
+.business-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: linear-gradient(135deg, #f4f0ff, #ebe5ff);
+  color: #6c4cf1;
+}
+
+.business-image-placeholder span {
+  max-width: 80%;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #5427d8;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

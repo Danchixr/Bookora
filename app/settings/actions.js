@@ -38,13 +38,14 @@ export async function updateBusinessProfile(formData) {
   const { supabase, business } = await getCurrentBusiness();
 
   const updates = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    email: formData.get("email"),
-    description: formData.get("description"),
-    logo_url: formData.get("logo_url"),
-    banner_url: formData.get("banner_url"),
-  };
+  name: formData.get("name"),
+  phone: formData.get("phone"),
+  email: formData.get("email"),
+  category: formData.get("category"),
+  description: formData.get("description"),
+  logo_url: formData.get("logo_url"),
+  banner_url: formData.get("banner_url"),
+};
 
   const { error } = await supabase
     .from("businesses")

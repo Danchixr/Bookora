@@ -5,6 +5,7 @@ import {
   updateServiceAction,
 } from "../actions";
 
+import { SERVICE_CATEGORIES } from "@/lib/categories";
 import ServiceErrorToast from "./ServiceErrorToast";
 import ImageUpload from "./ImageUpload";
 import Link from "next/link";
@@ -56,54 +57,28 @@ export default function ServiceForm({ children, service }) {
   defaultImage={service?.image_url || ""}
 />
 
-        <div className="form-group">
-          <label>
-            Category *
-          </label>
+       <div className="form-group">
+  <label>Service Category *</label>
 
-          <select
-            name="category"
-            defaultValue={service?.category || ""}
-            required
-          >
-            <option value="">
-              Select Category
-            </option>
+  <select
+    name="category"
+    defaultValue={service?.category || ""}
+    required
+  >
+    <option value="" disabled>
+      Select Service Category
+    </option>
 
-            <option value="Massage Therapy">
-              Massage Therapy
-            </option>
-
-            <option value="Facial Treatment">
-              Facial Treatment
-            </option>
-
-            <option value="Body Treatment">
-              Body Treatment
-            </option>
-
-            <option value="Nail Care">
-              Nail Care
-            </option>
-
-            <option value="Hair Services">
-              Hair Services
-            </option>
-
-            <option value="Makeup">
-              Makeup
-            </option>
-
-            <option value="Fitness Training">
-              Fitness Training
-            </option>
-
-            <option value="Photography">
-              Photography
-            </option>
-          </select>
-        </div>
-
+    {SERVICE_CATEGORIES.map((category) => (
+      <option
+        key={category.slug}
+        value={category.name}
+      >
+        {category.name}
+      </option>
+    ))}
+  </select>
+</div>
         <div className="form-group">
           <label>
             Service Name *

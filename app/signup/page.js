@@ -1,9 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
+  const router = useRouter();
+  const [supabase] = useState(() => createClient());
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,26 +18,47 @@ export default function SignupPage() {
   async function handleSignup(e) {
     e.preventDefault();
 
+    if (loading) return;
+
     setLoading(true);
     setMessage("");
 
-    const supabase = createClient();
+    const cleanName = name.trim();
+    const cleanEmail = email.trim().toLowerCase();
 
-    const { error } = await supabase.auth.signUp({
-      email,
+    const { data, error } = await supabase.auth.signUp({
+      email: cleanEmail,
       password,
       options: {
         data: {
-          full_name: name,
+          full_name: cleanName,
         },
       },
     });
 
     if (error) {
       setMessage(error.message);
-    } else {
-      setMessage("Account created successfully!");
+      setLoading(false);
+      return;
     }
+
+    /*
+      If signup created an authenticated session immediately,
+      continue straight into mandatory profile setup.
+    */
+    if (data.session) {
+      router.replace("/create-profile");
+      router.refresh();
+      return;
+    }
+
+    /*
+      If email confirmation is enabled, Supabase may create
+      the user without creating a session yet.
+    */
+    setMessage(
+      "Account created. Check your email to verify your account, then log in to complete your profile."
+    );
 
     setLoading(false);
   }
@@ -48,6 +73,7 @@ export default function SignupPage() {
           placeholder="Full name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          autoComplete="name"
           required
         />
 
@@ -56,6 +82,7 @@ export default function SignupPage() {
           placeholder="Email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
           required
         />
 
@@ -64,6 +91,7 @@ export default function SignupPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
           required
         />
 

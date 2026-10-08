@@ -26,6 +26,7 @@ export default function HomePage() {
   const [featuredBusinesses, setFeaturedBusinesses] = useState([]);
   const [businessesLoading, setBusinessesLoading] = useState(true);
   const [upcomingBookings, setUpcomingBookings] = useState([]);
+  const [recentlyVisited, setRecentlyVisited] = useState([]);
 
   // Fetch the authenticated user first, then load businesses.
   useEffect(() => {
@@ -98,6 +99,8 @@ export default function HomePage() {
       cancelled = true;
     };
   }, [supabase]);
+
+
 
   useEffect(() => {
   let cancelled = false;
@@ -196,6 +199,110 @@ export default function HomePage() {
     cancelled = true;
   };
 }, [supabase]);
+      
+  useEffect(() => {
+  let cancelled = false;
+
+  async function fetchRecentlyVisited() {
+    const {
+      data: { user: currentUser },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (cancelled) return;
+
+    if (authError || !currentUser) {
+      setRecentlyVisited([]);
+      return;
+    }
+
+    /*
+      Only completed bookings count as visits.
+
+      Newest appointments come first so if the customer
+      visited the same business several times, the most
+      recent visit determines its position.
+    */
+    const { data, error } = await supabase
+      .from("bookings")
+      .select(`
+        id,
+        business_id,
+        date,
+        time,
+        status,
+        businesses (
+          id,
+          name,
+          category,
+          location,
+          city,
+          state,
+          logo_url,
+          banner_url
+        )
+      `)
+      .eq("customer_id", currentUser.id)
+      .eq("status", "completed")
+      .order("date", { ascending: false })
+      .order("time", { ascending: false });
+
+    if (cancelled) return;
+
+    if (error) {
+      console.error(
+        "RECENTLY VISITED FETCH ERROR:",
+        error
+      );
+
+      setRecentlyVisited([]);
+      return;
+    }
+
+    /*
+      Remove duplicate businesses.
+
+      Because the query is already newest-first,
+      the first occurrence is the customer's
+      most recent visit to that business.
+    */
+    const uniqueBusinesses = new Map();
+
+    for (const booking of data || []) {
+      const business = booking.businesses;
+
+      if (!business?.id) continue;
+
+      if (!uniqueBusinesses.has(business.id)) {
+        uniqueBusinesses.set(business.id, {
+          id: business.id,
+          name: business.name || "Business",
+          category: business.category || "",
+          location:
+            business.location ||
+            [business.city, business.state]
+              .filter(Boolean)
+              .join(", "),
+          image:
+            business.banner_url ||
+            "",
+        });
+      }
+    }
+
+    setRecentlyVisited(
+      Array.from(uniqueBusinesses.values()).slice(0, 6)
+    );
+  }
+
+  fetchRecentlyVisited();
+
+  return () => {
+    cancelled = true;
+  };
+}, [supabase]);
+
+  
 
   // Show notification after creating a business.
   useEffect(() => {
@@ -254,7 +361,7 @@ export default function HomePage() {
           <FeaturedBusinesses businesses={featuredBusinesses} />
         )}
 
-        <RecentlyVisited />
+        <RecentlyVisited businesses={recentlyVisited} />
       </main>
 
       <BottomNavigation />

@@ -377,3 +377,54 @@
   }
 
 }
+
+
+
+
+
+.profile-picture-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: #6c4cf1;
+  color: white;
+  font-size: 38px;
+  font-weight: 750;
+}
+
+.profile-loading {
+  margin-top: 80px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.profile-error-state {
+  max-width: 420px;
+  margin: 80px auto 0;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.profile-error-state h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.profile-error-state p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.profile-error-state button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #6c4cf1;
+  color: white;
+  font-weight: 650;
+  cursor: pointer;
+}

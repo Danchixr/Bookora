@@ -1,12 +1,13 @@
-import {
-  ChevronLeft,
-  Search,
-  Heart,
-} from "lucide-react";
-
+import { ChevronLeft, Search } from "lucide-react";
 import Link from "next/link";
+import FavouriteButton from "./FavouriteButton";
 
-export default function BusinessHeader({ business }) {
+export default function BusinessHeader({
+  business,
+  initialIsFavourite,
+  isLoggedIn,
+  isOwnBusiness,
+}) {
   return (
     <section className="business-header">
 
@@ -32,9 +33,12 @@ export default function BusinessHeader({ business }) {
             <Search size={20} />
           </button>
 
-          <button className="header-btn">
-            <Heart size={20} />
-          </button>
+        <FavouriteButton
+          businessId={business.id}
+          initialIsFavourite={initialIsFavourite}
+          isLoggedIn={isLoggedIn}
+          isOwnBusiness={isOwnBusiness}
+        />
 
         </div>
 

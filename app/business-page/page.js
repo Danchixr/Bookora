@@ -21,6 +21,10 @@ export default async function BusinessPage({ searchParams }) {
 
   const supabase = await createClient();
 
+  const {
+  data: { user },
+  } = await supabase.auth.getUser();
+
   // Fetch the business selected on the homepage.
   const { data: business, error: businessError } = await supabase
     .from("businesses")
@@ -49,10 +53,33 @@ export default async function BusinessPage({ searchParams }) {
     throw new Error("Unable to load business services.");
   }
 
+
+  let initialIsFavourite = false;
+
+if (user) {
+  const { data: favourite, error: favouriteError } = await supabase
+    .from("favourites")
+    .select("id")
+    .eq("customer_id", user.id)
+    .eq("business_id", business.id)
+    .maybeSingle();
+
+  if (favouriteError) {
+    console.error("FAVOURITE STATUS ERROR:", favouriteError);
+  } else {
+    initialIsFavourite = Boolean(favourite);
+  }
+}
+
   return (
     <div className="public-business-page">
       <main className="public-business-main">
-        <BusinessHeader business={business} />
+        <BusinessHeader
+       business={business}
+       initialIsFavourite={initialIsFavourite}
+       isLoggedIn={Boolean(user)}
+       isOwnBusiness={user?.id === business.user_id}
+      />
 
         <BusinessInfo business={business} />
 

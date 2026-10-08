@@ -1,5 +1,6 @@
 "use client";
 
+import { BUSINESS_CATEGORIES } from "@/lib/categories";
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
@@ -111,16 +112,27 @@ if (error) {
     </div>
 
     <div className="form-group">
-      <label>Category</label>
+  <label>Business Category</label>
 
-      <select name="category">
-        <option>Select Category</option>
-        <option>Spa & Wellness</option>
-        <option>Healthcare</option>
-        <option>Beauty & Salon</option>
-        <option>Fitness</option>
-      </select>
-    </div>
+  <select
+    name="category"
+    defaultValue=""
+    required
+  >
+    <option value="" disabled>
+      Select Business Category
+    </option>
+
+    {BUSINESS_CATEGORIES.map((category) => (
+      <option
+        key={category.slug}
+        value={category.name}
+      >
+        {category.name}
+      </option>
+    ))}
+  </select>
+</div>
 
     <div className="form-group">
       <ImageUpload
